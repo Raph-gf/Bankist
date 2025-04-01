@@ -18,12 +18,14 @@ document.querySelectorAll('.nav__link').forEach(el => {
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   console.log(e.target);
-  // Matchting strategy
+
+  // Matchting strategy (ignore clicks that are not links)
+  //  if (e.target.matches('nav__link')) OR
   if (e.target.classList.contains('nav__link')) {
     e.preventDefault();
-
-    const id = this.getAttribute('href');
-    console.log(id);
+    const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  } else {
+    return;
   }
 });
