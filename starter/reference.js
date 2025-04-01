@@ -82,3 +82,49 @@ logo.classList.contains('c'); // not includes
 
 // Don't use
 logo.className = 'jonas';
+
+// TYPE OF EVENTS
+
+const h1 = document.querySelector('h1');
+
+// h1.addEventListener('mouseenter', e => {
+//   alert('addEventlistener: Great! You are reading the heading :D');
+// });
+
+// Old School
+// h1.onmouseenter = e => {
+//   alert('onmouseenter: Great! You are reading the heading :D');
+// };
+
+/* Remove event handler
+const alertH1 = e => {
+  alert('addEventlistener: Great! You are reading the heading :D');
+  // h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+*/
+/* Event Propagation in Practice
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+
+  // Stop propagation
+  //   e.stopPropagation();
+});
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+
+  console.log('LINK', e.target, e.currentTarget);
+});
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+
+  console.log('LINK', e.target, e.currentTarget);
+});
+*/
