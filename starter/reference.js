@@ -1,3 +1,5 @@
+'use strict';
+
 // Selecting Creating and inserting elements & Deleting Elements
 
 console.log(document.documentElement);
