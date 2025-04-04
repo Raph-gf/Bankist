@@ -1,5 +1,8 @@
+'use strict';
+
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
 
 btnScrollTo.addEventListener('click', e => {
   // Current position off the element
@@ -34,3 +37,46 @@ btnScrollTo.addEventListener('click', e => {
   // NEW SCHOOL WAY (only work on modern browser)
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// Sticky navigation : The scroll event
+
+// Old School
+/*const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+window.addEventListener('scroll', function (e) {
+  console.log(window.scrollY);
+  if (this.window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+});
+*/
+
+// With intersection Observer API
+/*const obsCallback = function (entries, observer) {
+  entries.array.forEach(entry => {
+    console.log(entry);
+  });
+};
+const obsOption = {
+  root: null,
+  threshold: [0,0.2],
+};
+
+const observer = new IntersectionObserver();
+observer.observe(section1);
+*/
+const header = doucment.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.Intersecting) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
