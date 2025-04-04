@@ -87,12 +87,12 @@ const allSection = document.querySelectorAll('.section');
 
 // callback function of the new intersectionObserver Object
 const revealSection = function (entries, observer) {
-  const [entry] = entries;
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
 
-  if (!entry.isIntersecting) return;
-
-  entry.target.classList.remove('section--hidden');
-  observer.unobserve(entry.target);
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+  });
 };
 
 // New intersectionObserver Object with the callback and option arguments
