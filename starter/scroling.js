@@ -2,6 +2,7 @@
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('.nav');
 
 btnScrollTo.addEventListener('click', e => {
   // Current position off the element
@@ -35,4 +36,73 @@ btnScrollTo.addEventListener('click', e => {
 
   // NEW SCHOOL WAY (only work on modern browser)
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Sticky navigation : The scroll event
+
+// Old School
+/*const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+window.addEventListener('scroll', function (e) {
+  console.log(window.scrollY);
+  if (this.window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+});
+*/
+
+// With intersection Observer API
+/*const obsCallback = function (entries, observer) {
+  entries.array.forEach(entry => {
+    console.log(entry);
+  });
+};
+const obsOption = {
+  root: null,
+  threshold: [0,0.2],
+};
+
+const observer = new IntersectionObserver();
+observer.observe(section1);
+*/
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+headerObserver.observe(header);
+
+// Revealing Element On Scroll With intersection Observer API
+const allSection = document.querySelectorAll('.section');
+
+// callback function of the new intersectionObserver Object
+const revealSection = function (entries, observer) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+  });
+};
+
+// New intersectionObserver Object with the callback and option arguments
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+// ForEach loop to apply sectionObserver on all section's
+allSection.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
 });
