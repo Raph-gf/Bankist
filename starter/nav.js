@@ -1,3 +1,5 @@
+'use strict';
+
 // Event delegation (Page navigation)
 
 /* Old school way
@@ -29,3 +31,44 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     return;
   }
 });
+
+// Passing arguments To Event Handlers
+// Links fade animation
+
+// const handlHover = function (e) {
+//   console.log(this, e.currentTarget);
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = this;
+//     });
+//     logo.style.opacity = this;
+//   }
+// };
+// const nav = document.querySelector('.nav');
+
+// OU fonction fleche pour eviter le .bind()
+
+const handleHover = (opacity, e) => {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+
+const nav = document.querySelector('.nav');
+
+// Passing "argument" into event handler function
+// Utilisation avec fonctions fléchées pour passer l'opacité
+nav.addEventListener('mouseover', e => handleHover(0.5, e));
+nav.addEventListener('mouseout', e => handleHover(1, e));
+// nav.addEventListener('mouseover', handlHover.bind(0.5));
+// nav.addEventListener('mouseout', handlHover.bind(1));
