@@ -65,12 +65,13 @@ const obsOption = {
 const observer = new IntersectionObserver();
 observer.observe(section1);
 */
-const header = doucment.querySelector('.header');
+const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
+
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
-  if (!entry.Intersecting) {
+
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   } else nav.classList.remove('sticky');
 };
