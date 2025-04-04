@@ -81,3 +81,28 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+// Revealing Element On Scroll With intersection Observer API
+const allSection = document.querySelectorAll('.section');
+
+// callback function of the new intersectionObserver Object
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+// New intersectionObserver Object with the callback and option arguments
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+// ForEach loop to apply sectionObserver on all section's
+allSection.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
