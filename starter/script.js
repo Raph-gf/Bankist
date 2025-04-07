@@ -4,3 +4,4 @@ import './scroling.js';
 import './nav.js';
 import './tabbed.js';
 import './lazyLoading.js';
+import './slider.js';
