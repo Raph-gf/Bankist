@@ -104,5 +104,5 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 // ForEach loop to apply sectionObserver on all section's
 allSection.forEach(section => {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
