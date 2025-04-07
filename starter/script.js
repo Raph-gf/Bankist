@@ -3,3 +3,4 @@ import './reference.js';
 import './scroling.js';
 import './nav.js';
 import './tabbed.js';
+import './lazyLoading.js';
